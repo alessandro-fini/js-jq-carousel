@@ -12,9 +12,24 @@ $(document).ready(function () {
     }
   });
 
+  $('.nav i').click(function(){
+    var onSelected = $('.nav i.active');
+    
+    onSelected.removeClass('active');    
+    $(this).addClass('active');
+
+    var selectedIndex = $(this).index();
+    var matchImg = $('.images img').eq(selectedIndex);  
+    var onImage = $('.images img.active')
+
+    onImage.removeClass('active');    
+    matchImg.addClass('active');
+  });
+
 });
 
-/* funzioni */
+
+/* FUNZIONI */
 
 function previousImage(){
 
