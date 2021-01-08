@@ -1,50 +1,71 @@
-$(document).ready(function(){
+$(document).ready(function () {
+  
+  $('.prev').click(previousImage);
 
-  $('.next').click(pulsanteNext); 
+  $('.next').click(nextImage);
 
-  $('.prev').click(pulsantePrev);
-
-  $('.nav i').click(function(){
-    $('.nav i.active').removeClass('active');
-    $(this).addClass('active');
+  $(document).keydown(function(e){
+    if (e.keyCode == 37) { // left
+      previousImage();
+    } else if (e.keyCode == 39) { // right
+      nextImage();
+    }
   });
 
 });
 
-function pulsanteNext(){
+/* funzioni */
 
-  var imgAttiva = $('.images img.active');
+function previousImage(){
 
-  var pallinoAttivo = $('.nav i.active');
+  /* active image */
+  var onImage = $('.images img.active');
+  /* remove active from image */
+  onImage.removeClass('active');  
+  /* if onImage is the first image */
+  if (onImage.hasClass('first')){
+    /* add active to the last image */
+    $('.images img.last').addClass('active');
+  } else {
+    /* add active to previous image */
+    onImage.prev().addClass('active');
+  }
 
-  imgAttiva.removeClass('active');
-  imgAttiva.next().addClass('active');
+  var onSelected = $('.nav i.active');
 
-  pallinoAttivo.removeClass('active');
-  pallinoAttivo.next().addClass('active');
+  onSelected.removeClass('active');
 
-  if(imgAttiva.hasClass('last')){
-    $('.images img.first').addClass('active');
-    $('.nav i.first').addClass('active');
+  if (onSelected.hasClass('first')){
+    $('.nav i.last').addClass('active');
+  } else {
+    onSelected.prev().addClass('active');
   }
 
 }
 
-function pulsantePrev(){
+function nextImage(){
 
-  var imgAttiva = $('.images img.active');
-  
-  var pallinoAttivo = $('.nav i.active');
-
-  imgAttiva.removeClass('active');
-  imgAttiva.prev().addClass('active');
-
-  pallinoAttivo.removeClass('active');
-  pallinoAttivo.prev().addClass('active');
-
-  if(imgAttiva.hasClass('first')){
-    $('.images img.last').addClass('active');
-    $('.nav i.last').addClass('active');
+  /* active image */
+  var onImage = $('.images img.active');
+  /* remove active from image */
+  onImage.removeClass('active');  
+  /* if onImage is the last image */
+  if (onImage.hasClass('last')){
+    /* add active to the first image */
+    $('.images img.first').addClass('active');
+  } else {
+    /* add active to next image */
+    onImage.next().addClass('active');
   }
 
+  var onSelected = $('.nav i.active');
+
+  onSelected.removeClass('active');
+
+  if (onSelected.hasClass('last')){
+    $('.nav i.first').addClass('active');
+  } else {
+    onSelected.next().addClass('active');
+  }
+  
 }
